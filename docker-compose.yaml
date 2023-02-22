@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      dockerfile: ./Dockerfile
+    ports:
+      - 4000:4000
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql
+    env_file:
+      - ./db.env
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  prisma:
+    build:
+      dockerfile: ./Dockerfile.prisma
+    volumes:
+      - ./:/app
+
+volumes:
+  db_data:
