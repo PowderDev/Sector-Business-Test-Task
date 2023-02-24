@@ -17,7 +17,6 @@ class UserController {
   getUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const id = this.checkIdParam(req.params.id);
-
       const user = await UserService.getUserById(id);
       res.json(user);
     } catch (err) {

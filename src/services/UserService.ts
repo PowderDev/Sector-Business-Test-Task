@@ -36,7 +36,7 @@ class UserService {
   async getAllUsers(page = 1, take = 2) {
     const skip = (page - 1) * take;
 
-    //! Prisma does not allow to do it any other way :(
+    //! Prisma does not allow to do it any other way
     const [count, users] = await prisma.$transaction([
       prisma.user.count(),
       prisma.user.findMany({

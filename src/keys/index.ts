@@ -1,11 +1,13 @@
+import Keys from '../types/keys';
 import devKeys from './dev';
 import prodKeys from './prod';
 
-let keys = devKeys;
+let keys: Keys;
 
 if (process.env.NODE_ENV == 'production') {
-  //@ts-expect-error: Unreachable error
   keys = prodKeys;
+} else {
+  keys = devKeys;
 }
 
 export default keys;

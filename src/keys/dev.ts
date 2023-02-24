@@ -1,4 +1,6 @@
-const keys = {
+import Keys from '../types/keys';
+
+const keys: Keys = {
   PORT: 4000,
   JWT_ACCESS_SECRET: 'Secret',
   JWT_REFRESH_SECRET: 'Secret',

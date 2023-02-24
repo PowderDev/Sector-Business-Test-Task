@@ -1,10 +1,18 @@
 import AuthService from '../services/AuthService';
 import { NextFunction, Request, Response } from 'express';
 import TokenService from '../services/TokenService';
+import { validationResult } from 'express-validator';
+import ApiError from '../exceptions/ApiError';
 
 class AuthController {
   registration = async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const errors = validationResult(req);
+
+      if (!errors.isEmpty()) {
+        throw ApiError.BadRequest('Validation error', errors.array());
+      }
+
       const { email, password, firstName } = req.body;
       const { accessToken, refreshToken } = await AuthService.register(
         firstName,
